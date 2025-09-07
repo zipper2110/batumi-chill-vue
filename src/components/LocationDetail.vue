@@ -5,6 +5,7 @@ import PhotoGallery from './PhotoGallery.vue';
 
 interface Props {
   location: Location;
+  previousView: 'list' | 'map';
 }
 
 const props = defineProps<Props>();
@@ -56,7 +57,7 @@ const handleGoBack = () => {
     <!-- Back button -->
     <div class="detail-header">
       <button class="back-button" @click="handleGoBack">
-        ← Назад к списку
+        ← {{ previousView === 'map' ? 'Назад к карте' : 'Назад к списку' }}
       </button>
     </div>
 

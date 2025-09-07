@@ -24,6 +24,7 @@ const emit = defineEmits<{
   mapReady: [];
 }>();
 
+
 const mapContainer = ref<HTMLDivElement>();
 const map = ref<L.Map | null>(null);
 const markers = ref<L.Marker[]>([]);
@@ -54,6 +55,25 @@ const getCategoryColor = (category: string): string => {
     OTHER: '#6c757d'
   };
   return colors[category] || '#6c757d';
+};
+
+// Category icons for popup
+const getCategoryIcon = (category: string): string => {
+  const icons: Record<string, string> = {
+    PARK: '🌳',
+    ATTRACTION: '🏛️',
+    RESTAURANT: '🍽️',
+    BEACH: '🏖️',
+    MUSEUM: '🏛️',
+    SHOPPING: '🛍️',
+    NIGHTLIFE: '🌃',
+    HOTEL: '🏨',
+    ENTERTAINMENT: '🎪',
+    DESSERT: '🍰',
+    CAFE: '☕',
+    OTHER: '📍'
+  };
+  return icons[category] || '📍';
 };
 
 // Create custom marker icon
@@ -178,7 +198,7 @@ const addMarkers = () => {
     `);
 
     marker.on('click', () => {
-      emit('locationClick', location);
+      marker.openPopup();
     });
 
     if (map.value) {
@@ -253,6 +273,7 @@ onUnmounted(() => {
     emit('locationClick', location);
   }
 };
+
 </script>
 
 <template>
@@ -492,6 +513,7 @@ onUnmounted(() => {
 :global(.map-popup .view-details-btn:hover) {
   background: #5a6fd8;
 }
+
 
 /* Mobile responsive */
 @media (max-width: 768px) {

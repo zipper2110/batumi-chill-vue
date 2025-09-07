@@ -12,6 +12,7 @@ import MapView from './components/MapView.vue';
 
 // Состояние приложения
 const currentView = ref<'list' | 'detail' | 'map'>('list');
+const previousView = ref<'list' | 'map'>('list');
 const selectedLocation = ref<Location | null>(null);
 
 // Используем composable для управления посещенными местами и фильтрами
@@ -46,17 +47,19 @@ const handleViewDetails = (location: Location) => {
   // Always get the latest location data from the reactive list
   const latestLocation = allLocations.value.find(loc => loc.name === location.name) || location;
   selectedLocation.value = latestLocation;
+  previousView.value = currentView.value;
   currentView.value = 'detail';
 };
 
 const handleGoBack = () => {
-  currentView.value = 'list';
+  currentView.value = previousView.value;
   selectedLocation.value = null;
 };
 
 const handleMapLocationClick = (location: Location) => {
   const latestLocation = allLocations.value.find(loc => loc.name === location.name) || location;
   selectedLocation.value = latestLocation;
+  previousView.value = 'map';
   currentView.value = 'detail';
 };
 
@@ -156,6 +159,7 @@ const handleSortChange = (sort: SortOption) => {
       <LocationDetail
         v-if="currentView === 'detail' && selectedLocation"
         :location="selectedLocation"
+        :previous-view="previousView"
         @toggle-visited="handleToggleVisited"
         @go-back="handleGoBack"
       />

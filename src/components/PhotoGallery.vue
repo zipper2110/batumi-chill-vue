@@ -37,7 +37,7 @@ const goToPhoto = (index: number) => {
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement;
   if (target) {
-    target.src = 'https://via.placeholder.com/400x300/667eea/ffffff?text=' + encodeURIComponent(props.locationName);
+    target.src = '';
   }
 };
 </script>
