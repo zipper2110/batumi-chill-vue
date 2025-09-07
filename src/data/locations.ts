@@ -200,8 +200,8 @@ export const locations: Location[] = [
     latitude: 41.63777,
     longitude: 41.64601,
     photos: [
-      "https://www.instagram.com/kava.lova.ge/",
-      "https://yandex.com/maps/org/kava_lova/74670066924/gallery/"
+      "https://madloba.info/media/images/kava-lova_-_03.max-1920x1080.format-webp.mwtmk.webp",
+      "https://madloba.info/media/images/kava-lova_-_02.max-1920x1080.format-webp.mwtmk.webp"
     ],
     address: "ул. С. Зубалашвили, 31, Батуми, Грузия",
     openingHours: "Ежедневно 10:00–21:00",

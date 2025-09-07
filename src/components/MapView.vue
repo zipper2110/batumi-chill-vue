@@ -15,6 +15,10 @@ L.Icon.Default.mergeOptions({
 
 interface Props {
   locations: Location[];
+  savedMapState?: {
+    center: [number, number];
+    zoom: number;
+  } | null;
 }
 
 const props = defineProps<Props>();
@@ -22,7 +26,32 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   locationClick: [location: Location];
   mapReady: [];
+  mapStateSave: [mapState: { center: [number, number]; zoom: number }];
 }>();
+
+// Save current map state
+const saveMapState = () => {
+  if (map.value) {
+    const center = map.value.getCenter();
+    const mapState = {
+      center: [center.lat, center.lng],
+      zoom: map.value.getZoom()
+    };
+    console.log('Map state saved:', mapState);
+    emit('mapStateSave', mapState);
+  }
+};
+
+// Restore saved map state
+const restoreMapState = (mapState?: { center: [number, number]; zoom: number }) => {
+  const stateToRestore = mapState || props.savedMapState;
+  if (map.value && stateToRestore) {
+    console.log('Restoring map state:', stateToRestore);
+    map.value.setView(stateToRestore.center, stateToRestore.zoom);
+  } else {
+    console.log('No saved map state to restore');
+  }
+};
 
 
 const mapContainer = ref<HTMLDivElement>();
@@ -137,14 +166,15 @@ const initMap = async () => {
       preferCanvas: false
     });
 
-    // Add tile layer
-    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    // Add tile layer with beautiful CartoDB Voyager style
+    const tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
       maxZoom: 18,
       tileSize: 256,
       zoomOffset: 0,
       updateWhenIdle: true,
-      keepBuffer: 2
+      keepBuffer: 2,
+      subdomains: 'abcd'
     });
 
     tileLayer.addTo(map.value as L.Map);
@@ -157,6 +187,12 @@ const initMap = async () => {
       if (map.value) {
         map.value.invalidateSize();
         map.value.setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
+        
+        // Restore saved map state if available
+        if (props.savedMapState) {
+          console.log('Restoring initial map state:', props.savedMapState);
+          map.value.setView(props.savedMapState.center, props.savedMapState.zoom);
+        }
       }
     }, 300);
 
@@ -198,6 +234,7 @@ const addMarkers = () => {
     `);
 
     marker.on('click', () => {
+      saveMapState(); // Save map position before opening popup
       marker.openPopup();
     });
 
@@ -245,7 +282,8 @@ const invalidateSize = () => {
 defineExpose({
   fitMapToMarkers,
   getMap: () => map.value,
-  invalidateSize
+  invalidateSize,
+  restoreMapState
 });
 
 onMounted(() => {
@@ -270,6 +308,7 @@ onUnmounted(() => {
 (window as any).viewLocationDetails = (locationName: string) => {
   const location = props.locations.find(loc => loc.name === locationName);
   if (location) {
+    saveMapState(); // Save map position before navigating
     emit('locationClick', location);
   }
 };
@@ -518,7 +557,7 @@ onUnmounted(() => {
 /* Mobile responsive */
 @media (max-width: 768px) {
   .map-container {
-    height: 400px;
+    height: 500px;
   }
   
   .map-header {
@@ -540,7 +579,7 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .map-container {
-    height: 350px;
+    height: 450px;
   }
   
   .legend-items {

@@ -15,6 +15,12 @@ const currentView = ref<'list' | 'detail' | 'map'>('list');
 const previousView = ref<'list' | 'map'>('list');
 const selectedLocation = ref<Location | null>(null);
 
+// Map state for position persistence
+const savedMapState = ref<{
+  center: [number, number];
+  zoom: number;
+} | null>(null);
+
 // Используем composable для управления посещенными местами и фильтрами
 const {
   locationsWithVisitedStatus,
@@ -52,8 +58,20 @@ const handleViewDetails = (location: Location) => {
 };
 
 const handleGoBack = () => {
+  console.log('Going back to:', previousView.value);
   currentView.value = previousView.value;
   selectedLocation.value = null;
+  
+  // Restore map position when returning to map view
+  if (previousView.value === 'map' && mapViewRef.value) {
+    console.log('Restoring map position...');
+    setTimeout(() => {
+      mapViewRef.value?.invalidateSize();
+      if (savedMapState.value) {
+        mapViewRef.value?.restoreMapState(savedMapState.value);
+      }
+    }, 100);
+  }
 };
 
 const handleMapLocationClick = (location: Location) => {
@@ -61,6 +79,12 @@ const handleMapLocationClick = (location: Location) => {
   selectedLocation.value = latestLocation;
   previousView.value = 'map';
   currentView.value = 'detail';
+};
+
+// Save map state when navigating away
+const handleMapStateSave = (mapState: { center: [number, number]; zoom: number }) => {
+  savedMapState.value = mapState;
+  console.log('Map state saved in App:', mapState);
 };
 
 const mapViewRef = ref<InstanceType<typeof MapView> | null>(null);
@@ -73,6 +97,8 @@ const handleViewToggle = (view: 'list' | 'map') => {
   if (view === 'map' && mapViewRef.value) {
     setTimeout(() => {
       mapViewRef.value?.invalidateSize();
+      // Restore saved map position
+      mapViewRef.value?.restoreMapState();
     }, 100);
   }
 };
@@ -153,7 +179,9 @@ const handleSortChange = (sort: SortOption) => {
         v-if="currentView === 'map'"
         ref="mapViewRef"
         :locations="locationsWithVisitedStatus"
+        :saved-map-state="savedMapState"
         @location-click="handleMapLocationClick"
+        @map-state-save="handleMapStateSave"
       />
 
       <LocationDetail
