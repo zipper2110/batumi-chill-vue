@@ -23,6 +23,9 @@ export type LocationCategory =
   | 'SHOPPING'      // Шопинг
   | 'NIGHTLIFE'     // Ночная жизнь
   | 'HOTEL'         // Отель
+  | 'ENTERTAINMENT' // Развлечения
+  | 'DESSERT'       // Десерты
+  | 'CAFE'          // Кафе
   | 'OTHER';        // Другое
 
 export type CoolnessRating = 

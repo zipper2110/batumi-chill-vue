@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { LocationCategory } from '../types/Location';
+import type { SortOption } from './SortOptions.vue';
 import CategoryFilter from './CategoryFilter.vue';
 import VisitedStatusFilter from './VisitedStatusFilter.vue';
 import SearchFilter from './SearchFilter.vue';
+import SortOptions from './SortOptions.vue';
 
 interface Props {
   selectedCategory: LocationCategory | null;
   selectedStatus: 'all' | 'visited' | 'not-visited';
   searchQuery: string;
+  selectedSort: SortOption;
 }
 
 const props = defineProps<Props>();
@@ -17,6 +20,7 @@ const emit = defineEmits<{
   categoryChange: [category: LocationCategory | null];
   statusChange: [status: 'all' | 'visited' | 'not-visited'];
   searchChange: [query: string];
+  sortChange: [sort: SortOption];
   clearAllFilters: [];
 }>();
 
@@ -30,13 +34,15 @@ const handleClearAllFilters = () => {
   emit('categoryChange', null);
   emit('statusChange', 'all');
   emit('searchChange', '');
+  emit('sortChange', 'name-asc');
   emit('clearAllFilters');
 };
 
 const hasActiveFilters = () => {
   return props.selectedCategory !== null || 
          props.selectedStatus !== 'all' || 
-         props.searchQuery !== '';
+         props.searchQuery !== '' ||
+         props.selectedSort !== 'name-asc';
 };
 </script>
 
@@ -70,6 +76,11 @@ const hasActiveFilters = () => {
       <SearchFilter 
         :search-query="searchQuery"
         @search-change="emit('searchChange', $event)"
+      />
+      
+      <SortOptions 
+        :selected-sort="selectedSort"
+        @sort-change="emit('sortChange', $event)"
       />
       
       <CategoryFilter 

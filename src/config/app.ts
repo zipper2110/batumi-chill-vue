@@ -20,6 +20,9 @@ export const CATEGORY_LABELS: Record<string, string> = {
   SHOPPING: 'Шопинг',
   NIGHTLIFE: 'Ночная жизнь',
   HOTEL: 'Отель',
+  ENTERTAINMENT: 'Развлечения',
+  DESSERT: 'Десерты',
+  CAFE: 'Кафе',
   OTHER: 'Другое'
 };
 

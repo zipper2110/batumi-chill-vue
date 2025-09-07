@@ -21,6 +21,9 @@ const categories: LocationCategory[] = [
   'SHOPPING',
   'NIGHTLIFE',
   'HOTEL',
+  'ENTERTAINMENT',
+  'DESSERT',
+  'CAFE',
   'OTHER'
 ];
 
@@ -34,6 +37,9 @@ const getCategoryIcon = (category: LocationCategory): string => {
     SHOPPING: '🛍️',
     NIGHTLIFE: '🌃',
     HOTEL: '🏨',
+    ENTERTAINMENT: '🎪',
+    DESSERT: '🍰',
+    CAFE: '☕',
     OTHER: '📍'
   };
   return icons[category];

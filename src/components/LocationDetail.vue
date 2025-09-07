@@ -60,7 +60,7 @@ const handleGoBack = () => {
       </button>
     </div>
 
-    <div class="detail-content">
+    <div class="location-detail-content">
       <!-- Photo Gallery -->
       <div class="detail-photos">
         <PhotoGallery 
@@ -177,7 +177,7 @@ const handleGoBack = () => {
   transform: translateY(-2px);
 }
 
-.detail-content {
+.location-detail-content {
   background: white;
   border-radius: 20px;
   overflow: hidden;
@@ -261,7 +261,7 @@ const handleGoBack = () => {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
-  padding: 1.5rem;
+  padding: 0.5rem;
   background: #f8f9fa;
   border-radius: 8px;
   border: 1px solid #e9ecef;

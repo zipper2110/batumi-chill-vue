@@ -1,5 +1,6 @@
 import { ref, watch, computed } from 'vue';
 import type { Location, LocationCategory, FilterOptions } from '../types/Location';
+import type { SortOption } from '../components/SortOptions.vue';
 
 const STORAGE_KEY = 'batumi-guide-visited-locations';
 
@@ -30,6 +31,7 @@ export function useVisitedLocations(initialLocations: Location[]) {
     visited: undefined,
     searchQuery: ''
   });
+  const sortOption = ref<SortOption>('name-asc');
   
   // Инициализируем статус посещения для всех локаций
   const allLocations = ref<Location[]>(
@@ -39,7 +41,35 @@ export function useVisitedLocations(initialLocations: Location[]) {
     }))
   );
 
-  // Фильтрованные локации
+  // Функция сортировки
+  const sortLocations = (locations: Location[], sort: SortOption): Location[] => {
+    const sorted = [...locations];
+    
+    switch (sort) {
+      case 'name-asc':
+        return sorted.sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+      case 'name-desc':
+        return sorted.sort((a, b) => b.name.localeCompare(a.name, 'ru'));
+      case 'category-asc':
+        return sorted.sort((a, b) => a.category.localeCompare(b.category));
+      case 'category-desc':
+        return sorted.sort((a, b) => b.category.localeCompare(a.category));
+      case 'visited-first':
+        return sorted.sort((a, b) => {
+          if (a.visited === b.visited) return a.name.localeCompare(b.name, 'ru');
+          return a.visited ? -1 : 1;
+        });
+      case 'not-visited-first':
+        return sorted.sort((a, b) => {
+          if (a.visited === b.visited) return a.name.localeCompare(b.name, 'ru');
+          return a.visited ? 1 : -1;
+        });
+      default:
+        return sorted;
+    }
+  };
+
+  // Фильтрованные и отсортированные локации
   const filteredLocations = computed(() => {
     let filtered = allLocations.value;
 
@@ -63,7 +93,8 @@ export function useVisitedLocations(initialLocations: Location[]) {
       );
     }
 
-    return filtered;
+    // Сортировка
+    return sortLocations(filtered, sortOption.value);
   });
 
   // Отслеживаем изменения и сохраняем в LocalStorage
@@ -116,16 +147,22 @@ export function useVisitedLocations(initialLocations: Location[]) {
     };
   };
 
+  const updateSort = (sort: SortOption) => {
+    sortOption.value = sort;
+  };
+
   return {
     locationsWithVisitedStatus: filteredLocations,
     allLocations,
     filterOptions,
+    sortOption,
     toggleVisited,
     isVisited,
     getVisitedCount,
     getTotalCount,
     getProgressPercentage,
     updateFilters,
-    clearFilters
+    clearFilters,
+    updateSort
   };
 }

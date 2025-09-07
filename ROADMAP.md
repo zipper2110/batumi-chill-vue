@@ -3,35 +3,35 @@
 This document outlines the development plan for the Batumi Guide application, divided into 10 iterations. 
 The approach is to start with a small, working MVP and incrementally add features.
 
-## Iteration 1: Project Setup & Basic Structure 
-- Initialize project
-- Set up basic project structure (packages, configurations)
-- Create a simple "Hello Batumi" landing page
-- Russian language as primary
+## Iteration 1: Project Setup & Basic Structure ✅ COMPLETED
+- ✅ Initialize project
+- ✅ Set up basic project structure (packages, configurations)
+- ✅ Create a simple "Hello Batumi" landing page
+- ✅ Russian language as primary
 
-## Iteration 2: Core Data Model & Simple UI 
-- Create the Location entity with essential fields (name, description, category, visited flag, photos)
-- Add seed data with 5-10 popular locations in Batumi
-- Load all locations from a single json file
-- Design and implement location card component
-- Display basic information on cards (name, category, short description)
-- Implement a basic list view that displays all locations
-- Add a simple header with application title
+## Iteration 2: Core Data Model & Simple UI ✅ COMPLETED
+- ✅ Create the Location entity with essential fields (name, description, category, visited flag, photos)
+- ✅ Add seed data with 5-10 popular locations in Batumi
+- ✅ Load all locations from a single json file
+- ✅ Design and implement location card component
+- ✅ Display basic information on cards (name, category, short description)
+- ✅ Implement a basic list view that displays all locations
+- ✅ Add a simple header with application title
 
-## Iteration 3: Location Details & Visit Tracking 
-- Enhance location cards with more details
-- Add support for multiple photos per location
-- Add the ability to mark places as visited/not visited
-- Implement persistent storage of visited status in LocalStorage
-- Create a location detail view that shows when a card is clicked
-- Add "back to list" navigation
+## Iteration 3: Location Details & Visit Tracking ✅ COMPLETED
+- ✅ Enhance location cards with more details
+- ✅ Add support for multiple photos per location
+- ✅ Add the ability to mark places as visited/not visited
+- ✅ Implement persistent storage of visited status in LocalStorage
+- ✅ Create a location detail view that shows when a card is clicked
+- ✅ Add "back to list" navigation
 
-## Iteration 4: Category Filtering 
-- Implement category filtering functionality
-- Create a category filter component in the UI
-- Add visual indicators for different categories
-- Enhance the UI to show active filters
-- Implement "show all/visited/not visited" toggle
+## Iteration 4: Category Filtering ✅ COMPLETED
+- ✅ Implement category filtering functionality
+- ✅ Create a category filter component in the UI
+- ✅ Add visual indicators for different categories
+- ✅ Enhance the UI to show active filters
+- ✅ Implement "show all/visited/not visited" toggle
 
 ## Iteration 5: Improved UI & UX 
 - Enhance overall application styling
