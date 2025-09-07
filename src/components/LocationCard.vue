@@ -44,8 +44,9 @@ const handleImageError = (event: Event) => {
   }
 };
 
-const openMap = (url: string) => {
-  window.open(url, '_blank');
+const openMap = (location: Location) => {
+  const googleMapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
+  window.open(googleMapsUrl, '_blank');
 };
 
 const handleViewDetails = () => {
@@ -97,9 +98,8 @@ const handleToggleVisited = (event: Event) => {
       
       <div class="card-actions">
         <button 
-          v-if="location.externalMapUrl"
           class="map-button"
-          @click.stop="openMap(location.externalMapUrl)"
+          @click.stop="openMap(location)"
         >
           🗺️ На карте
         </button>

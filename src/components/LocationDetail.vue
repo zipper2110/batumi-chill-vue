@@ -39,8 +39,9 @@ const getCoolnessColor = (rating: string): string => {
   return colors[rating] || '#95a5a6';
 };
 
-const openMap = (url: string) => {
-  window.open(url, '_blank');
+const openMap = (location: Location) => {
+  const googleMapsUrl = `https://www.google.com/maps?q=${location.latitude},${location.longitude}`;
+  window.open(googleMapsUrl, '_blank');
 };
 
 const handleToggleVisited = () => {
@@ -128,9 +129,8 @@ const handleGoBack = () => {
         <!-- Actions -->
         <div class="actions-section">
           <button 
-            v-if="location.externalMapUrl"
             class="action-button map-button"
-            @click="openMap(location.externalMapUrl)"
+            @click="openMap(location)"
           >
             🗺️ Открыть на карте
           </button>

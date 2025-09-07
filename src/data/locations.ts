@@ -14,7 +14,6 @@ export const locations: Location[] = [
     address: "Посёлок Мцване Концхи (Зелёный Мыс), Батуми 6411, Грузия",
     openingHours: "Ежедневно 09:00–18:00 (летом до 20:00)",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.6927167,41.7197833",
     visited: false
   },
   {
@@ -30,7 +29,6 @@ export const locations: Location[] = [
     address: "ул. Батуми, 16, пос. Чакви, Аджария 6200, Грузия",
     openingHours: "Круглосуточно (аквапарк обычно 10:00–19:00, сезонно)",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.721878,41.727186",
     visited: false
   },
   {
@@ -40,13 +38,11 @@ export const locations: Location[] = [
     latitude: 41.647467,
     longitude: 41.645394,
     photos: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Argo_Cable_Car%2C_Batumi_%2851154772534%29.jpg/1280px-Argo_Cable_Car%2C_Batumi_%2851154772534%29.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Argo_Cable_Car%2C_Batumi_%2851154796614%29.jpg/1280px-Argo_Cable_Car%2C_Batumi_%2851154796614%29.jpg"
+      "https://api.visitbatumi.com/media/images/600x600/69e1ea9b92dd48e69381395123e9a7a0.webp"
     ],
     address: "ул. Бако, 1, Батуми 6010, Грузия",
     openingHours: "Ежедневно 10:00–00:00 (может меняться по сезону и погоде)",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.647467,41.645394",
     visited: false
   },
   {
@@ -62,7 +58,6 @@ export const locations: Location[] = [
     address: "пос. Шекветили, муниципалитет Озургети, регион Гурия, Грузия",
     openingHours: "Лето: 10:00–19:00; Весна/осень: 10:00–18:00; Зима: 11:00–17:00; выходные: понедельник и четверг; последний вход — за 1 час до закрытия; вход бесплатный",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.960470,41.768605",
     visited: false
   },
   {
@@ -72,13 +67,12 @@ export const locations: Location[] = [
     latitude: 41.648626,
     longitude: 41.636359,
     photos: [
-      "https://www.tripadvisor.com/LocationPhotoDirectLink-g297576-d10950035-i265291836-Luca_Polare-Batumi_Adjara_Region.html",
-      "https://www.instagram.com/lucapolare/"
+      "https://madloba.info/media/images/Luca_Polare_na_Abashidz.max-1920x1080.format-webp.mwtmk.webp",
+      "https://madloba.info/media/images/Luca_Polare_na_Abashidz.max-1920x1080.format-webp.mwtmk_1DvigTC.webp"
     ],
     address: "ул. Иракли Абашидзе, 3 (по карте дом №1), Батуми",
     openingHours: "Ежедневно ~08:00–23:00 (может меняться по сезону)",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.648626,41.636359",
     visited: false
   },
   {
@@ -94,7 +88,6 @@ export const locations: Location[] = [
     address: "ул. К. Гамсахурдия, 6, Батуми",
     openingHours: "Ежедневно; 09:00–00:00",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.652119,41.636617",
     visited: false
   },
   {
@@ -104,13 +97,12 @@ export const locations: Location[] = [
     latitude: 41.651391,
     longitude: 41.635800,
     photos: [
-      "https://www.tripadvisor.com/LocationPhotoDirectLink-g297576-d17605182-i435453941-Aromi_Italiani-Batumi_Adjara_Region.html",
-      "https://www.tripadvisor.com/LocationPhotoDirectLink-g297576-d17605182-i451489038-Aromi_Italiani-Batumi_Adjara_Region.html"
+      "https://media-cdn.tripadvisor.com/media/photo-o/1a/ec/12/1f/best-view.jpg?w=3840",
+      "https://media-cdn.tripadvisor.com/media/photo-o/1b/6c/14/0d/leave-the-gun-take-the.jpg?w=3840"
     ],
     address: "ул. Н. Бараташвили, 6 (Площадь Европы), Батуми",
     openingHours: "Ежедневно ~09:00–01:00",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.651391,41.635800",
     visited: false
   },
   {
@@ -126,7 +118,6 @@ export const locations: Location[] = [
     address: "ул. Кутаисская, 8, Батуми",
     openingHours: "Ежедневно ~10:00–23:00 (по выходным могут работать дольше)",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.651263,41.641719",
     visited: false
   },
   {
@@ -136,13 +127,11 @@ export const locations: Location[] = [
     latitude: 41.650017,
     longitude: 41.642735,
     photos: [
-      "https://www.instagram.com/vietnamcafe_batumi/",
-      "https://www.tripadvisor.com/Restaurant_Review-g297576-d27486072-Reviews-Vietnam_Cafe-Batumi_Adjara_Region.html"
+      "https://avatars.mds.yandex.net/get-altay/16914582/2a00000198510d097da2f912b44f6c7e6bc6/L_height"
     ],
     address: "ул. Вахтанга Горгасали, 2 (их соцсети указывают также №4/4А), Батуми",
     openingHours: "Ежедневно 12:00–22:00",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.650017,41.642735",
     visited: false
   },
   {
@@ -152,13 +141,13 @@ export const locations: Location[] = [
     latitude: 41.648393,
     longitude: 41.630535,
     photos: [
-      "https://www.tripadvisor.com/Restaurant_Review-g297576-d21208342-Reviews-Mao_Mao-Batumi_Adjara_Region.html",
-      "https://yandex.com/maps/10278/batumi/house/YEgYcARgTEYCQFprfXp1eX9qZw==/"
+      "https://media-cdn.tripadvisor.com/media/photo-o/2b/b1/93/bd/singapore-noodles-with.jpg?w=3840",
+"https://media-cdn.tripadvisor.com/media/photo-o/2b/b1/95/b5/poke-bowl-kimchi-salmon.jpg?w=3840"
+
     ],
     address: "пр-т Мемед Абашидзе, 60, Батуми",
     openingHours: "Ежедневно с 12:00 (закрытие зависит от дня/сезона)",
     coolnessRating: "JUST_OK",
-    externalMapUrl: "https://maps.google.com/?q=41.648393,41.630535",
     visited: false
   },
   {
@@ -168,13 +157,11 @@ export const locations: Location[] = [
     latitude: 41.649121,
     longitude: 41.629511,
     photos: [
-      "https://www.instagram.com/acapulco_batumi/",
-      "https://yandex.com/maps/org/acapulco/84498079684/gallery/"
+      "https://avatars.mds.yandex.net/get-altay/13193546/2a0000019247a81edbd9b070960c2b6e3d2e/L_height"
     ],
     address: "ул. Петре Меликишвили, 17 (рядом с парком 6 Мая), Батуми",
     openingHours: "Вт–Вс ~17:00–00:00, Пн — выходной",
     coolnessRating: "JUST_OK",
-    externalMapUrl: "https://maps.google.com/?q=41.649121,41.629511",
     visited: false
   },
   {
@@ -184,13 +171,11 @@ export const locations: Location[] = [
     latitude: 41.650859,
     longitude: 41.643462,
     photos: [
-      "https://www.instagram.com/theplace_batumi/",
-      "https://yandex.com/maps/geo/1_parnavaz_mepe_street_batumi/53151373/?ll=41.643462%2C41.650859&z=17"
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/07/86/3b/balcony.jpg?w=900&h=500&s=1"
     ],
     address: "ул. Царя Парнаваза, 1, Батуми, Грузия",
     openingHours: "Ежедневно 10:00–00:00 (по сезону)",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=41.650859,41.643462",
     visited: false
   },
   {
@@ -206,7 +191,6 @@ export const locations: Location[] = [
     address: "ул. С. Зубалашвили, 31, Батуми, Грузия",
     openingHours: "Ежедневно 10:00–21:00",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=41.63777,41.64601",
     visited: false
   },
   {
@@ -222,7 +206,6 @@ export const locations: Location[] = [
     address: "просп. Шота Руставели, 17, Батуми, Грузия",
     openingHours: "Ежедневно ~10:00–00:00",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.63420,41.65150",
     visited: false
   },
   {
@@ -232,45 +215,39 @@ export const locations: Location[] = [
     latitude: 41.6489,
     longitude: 41.6417,
     photos: [
-      "https://www.instagram.com/rhino_coffee_georgia/",
-      "https://www.tripadvisor.com/Restaurant_Review-g297576-d16813172-Reviews-Rhino_Coffee-Batumi_Adjara_Region.html"
+      "https://madloba.info/media/images/rhino-coffee-03.max-1920x1080.format-webp.mwtmk.webp"
     ],
     address: "ул. Харитона Ахвледиани, 4а, Батуми, Грузия",
     openingHours: "Пн–Пт 08:30–21:00; Сб–Вс 09:00–21:00",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=Khariton+Akhvlediani+St+4a,+Batumi",
     visited: false
   },
   {
-    name: "Privet iz Batuma (Привет из Батума)",
-    description: "«Шлю привет из Батума» — много блюд и есть где посидеть, кухня средняя (по твоей пометке). Историческое кафе 2003 года в центре, большой зал + витрина десертов. Для ребёнка — безопасно и просторно; берите мороженое/пирожные, есть детские варианты напитков.",
+    name: "Шлю привет из Батума",
+    description: "«Шлю привет из Батума» — много блюд и есть где посидеть, кухня средняя. Историческое кафе 2003 года в центре, большой зал + витрина десертов. Для ребёнка — безопасно и просторно; берите мороженое/пирожные, есть детские варианты напитков.",
     category: "CAFE",
     latitude: 41.6499,
     longitude: 41.6413,
     photos: [
-      "https://www.tripadvisor.ru/LocationPhotoDirectLink-g297576-d1098919-i271579704-Privet_iz_Batuma-Batumi_Adjara_Region.html",
-      "https://www.tripadvisor.com/Restaurant_Review-g297576-d1098919-Reviews-Privet_iz_Batuma-Batumi_Adjara_Region.html"
+      "https://www.infobatumi.ge/wp-content/uploads/2024/11/Privet-Iz-Batuma-2024-8192.jpg"
     ],
     address: "просп. Мемеда Абашидзе, 39, Батуми, Грузия",
     openingHours: "Ежедневно ~10:00–00:00",
     coolnessRating: "JUST_OK",
-    externalMapUrl: "https://maps.google.com/?q=39+Memed+Abashidze+Ave,+Batumi",
     visited: false
   },
   {
-    name: "Сахли (Sakhli)",
-    description: "Домашний семейный ресторан в старом доме с уютным зелёным двором — как ты и писал, «классный сад и дом». Атмосфера спокойная, без шумной музыки; во дворе есть тень и пространство, где удобно посидеть с ребёнком (коляска проходит, есть место для манёвра). По кухне — акцент на домашние грузинские блюда, сезонные овощи, хачапури/хинкали, супы; порции щедрые.",
+    name: "Сахли",
+    description: "Домашний семейный ресторан в старом доме с уютным зелёным двором. Атмосфера спокойная, без шумной музыки; во дворе есть тень и пространство, где удобно посидеть с ребёнком. По кухне — акцент на домашние грузинские блюда, сезонные овощи, хачапури/хинкали, супы; порции щедрые.",
     category: "RESTAURANT",
     latitude: 41.648144,
     longitude: 41.642294,
     photos: [
-      "https://gobatumi.com/file-manager/files/shares/Catalog/restaurant/70/MSD_8699.jpg?v=1725547503",
-      "https://gobatumi.com/file-manager/files/shares/Catalog/restaurant/70/MSD_8870.jpg?v=1725547524"
+      "https://madloba.info/media/images/Sakhli_03.2e16d0ba.fill-1366x768.format-webp.mwtmk.webp",
     ],
     address: "переулок Реваза Комахидзе, 8, Батуми, Грузия",
     openingHours: "Ежедневно ~12:00–23:00 (в сезон может меняться)",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=41.648144,41.642294",
     visited: false
   },
   {
@@ -286,7 +263,6 @@ export const locations: Location[] = [
     address: "ул. Ноэ Жордания, 24, Батуми, Грузия",
     openingHours: "Ежедневно 09:00–23:00",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=41.650030,41.639294",
     visited: false
   },
   // Original locations from the previous version
@@ -297,42 +273,40 @@ export const locations: Location[] = [
     latitude: 41.6556,
     longitude: 41.6367,
     photos: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Batumi_Boulevard_2019.jpg/800px-Batumi_Boulevard_2019.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/8/85/Batumi_Boulevard_Colonnades.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/3/32/Batumi_boulevardbeach.jpg"
     ],
     address: "Батумский бульвар, Батуми, Грузия",
     openingHours: "Круглосуточно",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.6556,41.6367",
     visited: false
   },
   {
-    name: "Башни Али и Нино",
+    name: "Статуи Али и Нино",
     description: "Символическая скульптура двух движущихся фигур, представляющих трагическую любовь мусульманина Али и христианки Нино. Фигуры движутся навстречу друг другу и расходятся, символизируя вечную любовь.",
     category: "ATTRACTION",
     latitude: 41.6556,
     longitude: 41.6367,
     photos: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ali_and_Nino_statue_in_Batumi.jpg/800px-Ali_and_Nino_statue_in_Batumi.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Batumi_Dec_2019_08_34_16_699000.jpeg/2560px-Batumi_Dec_2019_08_34_16_699000.jpeg"
     ],
     address: "Батумский бульвар, Батуми, Грузия",
     openingHours: "Круглосуточно",
     coolnessRating: "MUST_SEE",
-    externalMapUrl: "https://maps.google.com/?q=41.6556,41.6367",
     visited: false
   },
   {
     name: "Площадь Европы",
     description: "Центральная площадь Батуми с красивой архитектурой в европейском стиле. Фонтаны, кафе, магазины и исторические здания. Сердце города и место встреч.",
     category: "ATTRACTION",
-    latitude: 41.6431,
-    longitude: 41.6394,
+    latitude: 41.650624,
+    longitude: 41.6362842,
     photos: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Europe_Square_Batumi.jpg/800px-Europe_Square_Batumi.jpg"
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/77/d1/1b/europe-square-the-majestic.jpg?w=900&h=500&s=1"
     ],
     address: "Площадь Европы, Батуми, Грузия",
     openingHours: "Круглосуточно",
     coolnessRating: "COOL",
-    externalMapUrl: "https://maps.google.com/?q=41.6431,41.6394",
     visited: false
   },
   {
@@ -342,12 +316,11 @@ export const locations: Location[] = [
     latitude: 41.6431,
     longitude: 41.6394,
     photos: [
-      "https://example.com/adjara_museum.jpg"
+      "https://upload.wikimedia.org/wikipedia/commons/c/c4/State_Art_Museum_of_Adjara.jpg"
     ],
     address: "ул. Руставели 8, Батуми, Грузия",
     openingHours: "10:00–18:00 (выходной: понедельник)",
     coolnessRating: "JUST_OK",
-    externalMapUrl: "https://maps.google.com/?q=41.6431,41.6394",
     visited: false
   },
 
