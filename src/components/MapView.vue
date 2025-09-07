@@ -34,7 +34,7 @@ const saveMapState = () => {
   if (map.value) {
     const center = map.value.getCenter();
     const mapState = {
-      center: [center.lat, center.lng],
+      center: [center.lat, center.lng] as [number, number],
       zoom: map.value.getZoom()
     };
     console.log('Map state saved:', mapState);

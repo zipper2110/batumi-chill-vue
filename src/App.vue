@@ -12,7 +12,7 @@ import MapView from './components/MapView.vue';
 
 // Состояние приложения
 const currentView = ref<'list' | 'detail' | 'map'>('list');
-const previousView = ref<'list' | 'map'>('list');
+const previousView = ref<'list' | 'map' | 'detail'>('list');
 const selectedLocation = ref<Location | null>(null);
 
 // Map state for position persistence

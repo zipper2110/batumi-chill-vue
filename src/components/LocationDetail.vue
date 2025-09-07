@@ -5,7 +5,7 @@ import PhotoGallery from './PhotoGallery.vue';
 
 interface Props {
   location: Location;
-  previousView: 'list' | 'map';
+  previousView: 'list' | 'map' | 'detail';
 }
 
 const props = defineProps<Props>();
