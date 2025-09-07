@@ -8,9 +8,10 @@ import AppHeader from './components/AppHeader.vue';
 import LocationList from './components/LocationList.vue';
 import LocationDetail from './components/LocationDetail.vue';
 import FilterPanel from './components/FilterPanel.vue';
+import MapView from './components/MapView.vue';
 
 // Состояние приложения
-const currentView = ref<'list' | 'detail'>('list');
+const currentView = ref<'list' | 'detail' | 'map'>('list');
 const selectedLocation = ref<Location | null>(null);
 
 // Используем composable для управления посещенными местами и фильтрами
@@ -53,6 +54,26 @@ const handleGoBack = () => {
   selectedLocation.value = null;
 };
 
+const handleMapLocationClick = (location: Location) => {
+  const latestLocation = allLocations.value.find(loc => loc.name === location.name) || location;
+  selectedLocation.value = latestLocation;
+  currentView.value = 'detail';
+};
+
+const mapViewRef = ref<InstanceType<typeof MapView> | null>(null);
+
+const handleViewToggle = (view: 'list' | 'map') => {
+  currentView.value = view;
+  selectedLocation.value = null;
+  
+  // Invalidate map size when switching to map view
+  if (view === 'map' && mapViewRef.value) {
+    setTimeout(() => {
+      mapViewRef.value?.invalidateSize();
+    }, 100);
+  }
+};
+
 // Filter handlers
 const handleCategoryChange = (category: LocationCategory | null) => {
   updateFilters({ category: category || undefined });
@@ -78,13 +99,33 @@ const handleSortChange = (sort: SortOption) => {
 
 <template>
   <div class="app">
-    <AppHeader 
+    <AppHeader
       :total-count="getTotalCount()"
       :visited-count="getVisitedCount()"
     />
-    
+
+    <!-- View Toggle Navigation -->
+    <nav class="view-nav">
+      <div class="view-nav-content">
+        <button 
+          class="view-toggle"
+          :class="{ active: currentView === 'list' }"
+          @click="handleViewToggle('list')"
+        >
+          📋 Список
+        </button>
+        <button 
+          class="view-toggle"
+          :class="{ active: currentView === 'map' }"
+          @click="handleViewToggle('map')"
+        >
+          🗺️ Карта
+        </button>
+      </div>
+    </nav>
+
     <main class="main">
-      <LocationList 
+      <LocationList
         v-if="currentView === 'list'"
         :locations="locationsWithVisitedStatus"
         @toggle-visited="handleToggleVisited"
@@ -104,15 +145,22 @@ const handleSortChange = (sort: SortOption) => {
           />
         </template>
       </LocationList>
-      
-      <LocationDetail 
+
+      <MapView
+        v-if="currentView === 'map'"
+        ref="mapViewRef"
+        :locations="locationsWithVisitedStatus"
+        @location-click="handleMapLocationClick"
+      />
+
+      <LocationDetail
         v-if="currentView === 'detail' && selectedLocation"
         :location="selectedLocation"
         @toggle-visited="handleToggleVisited"
         @go-back="handleGoBack"
       />
     </main>
-    
+
     <footer class="footer">
       <p>Создано с ❤️ для любителей Батуми</p>
     </footer>
@@ -151,6 +199,47 @@ const handleSortChange = (sort: SortOption) => {
   padding: 0;
   position: relative;
   z-index: 1;
+}
+
+.view-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.view-nav-content {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.view-toggle {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.view-toggle:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+}
+
+.view-toggle.active {
+  background: #667eea;
+  border-color: #667eea;
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .footer {
@@ -209,12 +298,33 @@ const handleSortChange = (sort: SortOption) => {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
   
+  .view-nav-content {
+    padding: 0.75rem;
+    gap: 0.25rem;
+  }
+  
+  .view-toggle {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
   .footer {
     padding: 1.5rem 1rem;
   }
   
   .footer p {
     font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-nav-content {
+    padding: 0.5rem;
+  }
+  
+  .view-toggle {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 }
 
