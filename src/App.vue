@@ -1,33 +1,71 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import type { Location } from './types/Location';
 import { locations } from './data/locations';
+import { useVisitedLocations } from './composables/useVisitedLocations';
 import AppHeader from './components/AppHeader.vue';
 import LocationList from './components/LocationList.vue';
+import LocationDetail from './components/LocationDetail.vue';
 
 // Состояние приложения
-const allLocations = ref<Location[]>(locations);
-const visitedCount = computed(() => 
-  allLocations.value.filter(location => location.visited).length
-);
+const currentView = ref<'list' | 'detail'>('list');
+const selectedLocation = ref<Location | null>(null);
 
-// Обработчик переключения статуса посещения
-const toggleVisited = (location: Location) => {
-  const index = allLocations.value.findIndex(loc => loc.name === location.name);
-  if (index !== -1) {
-    allLocations.value[index].visited = !allLocations.value[index].visited;
+// Используем composable для управления посещенными местами
+const {
+  locationsWithVisitedStatus,
+  toggleVisited,
+  getVisitedCount,
+  getTotalCount
+} = useVisitedLocations(locations);
+
+// Обработчики событий
+const handleToggleVisited = (location: Location) => {
+  toggleVisited(location);
+  
+  // Update the selected location if we're in detail view
+  if (currentView.value === 'detail' && selectedLocation.value?.name === location.name) {
+    // Find the updated location from the reactive list
+    const updatedLocation = locationsWithVisitedStatus.value.find(loc => loc.name === location.name);
+    if (updatedLocation) {
+      selectedLocation.value = updatedLocation;
+    }
   }
+};
+
+const handleViewDetails = (location: Location) => {
+  // Always get the latest location data from the reactive list
+  const latestLocation = locationsWithVisitedStatus.value.find(loc => loc.name === location.name) || location;
+  selectedLocation.value = latestLocation;
+  currentView.value = 'detail';
+};
+
+const handleGoBack = () => {
+  currentView.value = 'list';
+  selectedLocation.value = null;
 };
 </script>
 
 <template>
   <div class="app">
-    <AppHeader />
+    <AppHeader 
+      :total-count="getTotalCount()"
+      :visited-count="getVisitedCount()"
+    />
     
     <main class="main">
       <LocationList 
-        :locations="allLocations"
-        @toggle-visited="toggleVisited"
+        v-if="currentView === 'list'"
+        :locations="locationsWithVisitedStatus"
+        @toggle-visited="handleToggleVisited"
+        @view-details="handleViewDetails"
+      />
+      
+      <LocationDetail 
+        v-if="currentView === 'detail' && selectedLocation"
+        :location="selectedLocation"
+        @toggle-visited="handleToggleVisited"
+        @go-back="handleGoBack"
       />
     </main>
     

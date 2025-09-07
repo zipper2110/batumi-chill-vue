@@ -8,6 +8,11 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const emit = defineEmits<{
+  toggleVisited: [location: Location];
+  viewDetails: [location: Location];
+}>();
+
 const getCategoryIcon = (category: string): string => {
   const icons: Record<string, string> = {
     PARK: '🌳',
@@ -35,17 +40,26 @@ const getCoolnessColor = (rating: string): string => {
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement;
   if (target) {
-    target.src = 'https://via.placeholder.com/300x200/667eea/ffffff?text=' + encodeURIComponent(props.location.name);
+    target.src = '';
   }
 };
 
 const openMap = (url: string) => {
   window.open(url, '_blank');
 };
+
+const handleViewDetails = () => {
+  emit('viewDetails', props.location);
+};
+
+const handleToggleVisited = (event: Event) => {
+  event.stopPropagation(); // Prevent card click when clicking button
+  emit('toggleVisited', props.location);
+};
 </script>
 
 <template>
-  <div class="location-card">
+  <div class="location-card" @click="handleViewDetails">
     <div class="card-image">
       <img 
         :src="location.photos[0]" 
@@ -85,14 +99,14 @@ const openMap = (url: string) => {
         <button 
           v-if="location.externalMapUrl"
           class="map-button"
-          @click="openMap(location.externalMapUrl)"
+          @click.stop="openMap(location.externalMapUrl)"
         >
           🗺️ На карте
         </button>
         <button 
           class="visit-button"
           :class="{ visited: location.visited }"
-          @click="$emit('toggleVisited', location)"
+          @click="handleToggleVisited"
         >
           {{ location.visited ? '✅ Посещено' : '⭕ Не посещено' }}
         </button>
@@ -109,6 +123,7 @@ const openMap = (url: string) => {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 1.5rem;
+  cursor: pointer;
 }
 
 .location-card:hover {

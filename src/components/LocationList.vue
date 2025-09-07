@@ -11,10 +11,15 @@ const props = defineProps<Props>();
 
 const emit = defineEmits<{
   toggleVisited: [location: Location];
+  viewDetails: [location: Location];
 }>();
 
 const toggleVisited = (location: Location) => {
   emit('toggleVisited', location);
+};
+
+const viewDetails = (location: Location) => {
+  emit('viewDetails', location);
 };
 </script>
 
@@ -33,6 +38,7 @@ const toggleVisited = (location: Location) => {
         :key="location.name"
         :location="location"
         @toggle-visited="toggleVisited"
+        @view-details="viewDetails"
       />
     </div>
     
