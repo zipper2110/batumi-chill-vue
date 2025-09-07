@@ -1,5 +1,5 @@
-import { ref, watch } from 'vue';
-import type { Location } from '../types/Location';
+import { ref, watch, computed } from 'vue';
+import type { Location, LocationCategory, FilterOptions } from '../types/Location';
 
 const STORAGE_KEY = 'batumi-guide-visited-locations';
 
@@ -25,21 +25,53 @@ const saveVisitedLocations = (visitedSet: Set<string>) => {
 
 export function useVisitedLocations(initialLocations: Location[]) {
   const visitedLocations = ref<Set<string>>(getStoredVisitedLocations());
+  const filterOptions = ref<FilterOptions>({
+    category: undefined,
+    visited: undefined,
+    searchQuery: ''
+  });
   
   // Инициализируем статус посещения для всех локаций
-  const locationsWithVisitedStatus = ref<Location[]>(
+  const allLocations = ref<Location[]>(
     initialLocations.map(location => ({
       ...location,
       visited: visitedLocations.value.has(location.name)
     }))
   );
 
+  // Фильтрованные локации
+  const filteredLocations = computed(() => {
+    let filtered = allLocations.value;
+
+    // Фильтр по категории
+    if (filterOptions.value.category) {
+      filtered = filtered.filter(location => location.category === filterOptions.value.category);
+    }
+
+    // Фильтр по статусу посещения
+    if (filterOptions.value.visited !== undefined) {
+      filtered = filtered.filter(location => location.visited === filterOptions.value.visited);
+    }
+
+    // Фильтр по поисковому запросу
+    if (filterOptions.value.searchQuery) {
+      const query = filterOptions.value.searchQuery.toLowerCase();
+      filtered = filtered.filter(location => 
+        location.name.toLowerCase().includes(query) ||
+        location.description.toLowerCase().includes(query) ||
+        (location.address && location.address.toLowerCase().includes(query))
+      );
+    }
+
+    return filtered;
+  });
+
   // Отслеживаем изменения и сохраняем в LocalStorage
   watch(visitedLocations, (newVisitedSet) => {
     saveVisitedLocations(newVisitedSet);
     
     // Обновляем статус в локациях
-    locationsWithVisitedStatus.value = locationsWithVisitedStatus.value.map(location => ({
+    allLocations.value = allLocations.value.map(location => ({
       ...location,
       visited: newVisitedSet.has(location.name)
     }));
@@ -64,7 +96,7 @@ export function useVisitedLocations(initialLocations: Location[]) {
   };
 
   const getTotalCount = (): number => {
-    return locationsWithVisitedStatus.value.length;
+    return allLocations.value.length;
   };
 
   const getProgressPercentage = (): number => {
@@ -72,12 +104,28 @@ export function useVisitedLocations(initialLocations: Location[]) {
     return total > 0 ? Math.round((getVisitedCount() / total) * 100) : 0;
   };
 
+  const updateFilters = (options: Partial<FilterOptions>) => {
+    filterOptions.value = { ...filterOptions.value, ...options };
+  };
+
+  const clearFilters = () => {
+    filterOptions.value = {
+      category: undefined,
+      visited: undefined,
+      searchQuery: ''
+    };
+  };
+
   return {
-    locationsWithVisitedStatus,
+    locationsWithVisitedStatus: filteredLocations,
+    allLocations,
+    filterOptions,
     toggleVisited,
     isVisited,
     getVisitedCount,
     getTotalCount,
-    getProgressPercentage
+    getProgressPercentage,
+    updateFilters,
+    clearFilters
   };
 }

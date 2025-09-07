@@ -32,6 +32,9 @@ const viewDetails = (location: Location) => {
       </p>
     </div>
     
+    <!-- Filters Slot -->
+    <slot name="filters"></slot>
+    
     <div class="locations-grid">
       <LocationCard
         v-for="location in locations"
