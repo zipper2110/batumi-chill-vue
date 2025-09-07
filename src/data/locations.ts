@@ -64,8 +64,8 @@ export const locations: Location[] = [
     name: "Luca Polare",
     description: "Сеть джелатерий: «классное мороженое» — большой выбор вкусов, кофейные напитки, вафли. Удобно забежать по дороге. Для ребёнка 4–5 лет: маленькие рожки, фруктовые сорбеты без молока, рядом лавочки на площади.",
     category: "DESSERT",
-    latitude: 41.648626,
-    longitude: 41.636359,
+    latitude: 41.6496419,
+    longitude: 41.6382085,
     photos: [
       "https://madloba.info/media/images/Luca_Polare_na_Abashidz.max-1920x1080.format-webp.mwtmk.webp",
       "https://madloba.info/media/images/Luca_Polare_na_Abashidz.max-1920x1080.format-webp.mwtmk_1DvigTC.webp"
@@ -182,8 +182,8 @@ export const locations: Location[] = [
     name: "Kava Lova",
     description: "«Kava Lova» — классная кофейня + кухня: авторский кофе от чемпионки-бариста, завтраки и домашние десерты. Новый зал на Зубалашвили 31; внутри тихо, у окна — места для коляски. Для дочки 4.5 года: берите вафли/панкейки и какао; персонал тёплый, детям рады.",
     category: "CAFE",
-    latitude: 41.63777,
-    longitude: 41.64601,
+    latitude: 41.6460271,
+    longitude: 41.6375689,
     photos: [
       "https://madloba.info/media/images/kava-lova_-_03.max-1920x1080.format-webp.mwtmk.webp",
       "https://madloba.info/media/images/kava-lova_-_02.max-1920x1080.format-webp.mwtmk.webp"
@@ -197,8 +197,8 @@ export const locations: Location[] = [
     name: "Bern",
     description: "«Берн» — топовый сервис и кухня: просторные залы, аккуратная подача, грузинско-европейское меню. Хорош для семейного ужина; детское кресло обычно дают по запросу, а по меню удобно подобрать неострые блюда. На набережной Руставели — дойдёте быстро.",
     category: "RESTAURANT",
-    latitude: 41.63420,
-    longitude: 41.65150,
+    latitude: 41.6514442,
+    longitude: 41.6339796,
     photos: [
       "https://gobatumi.com/file-manager/files/shares/Catalog/restaurant/berni/bern-1.jpg",
       "https://gobatumi.com/file-manager/files/shares/Catalog/restaurant/berni/bern-2.jpg"
@@ -212,8 +212,8 @@ export const locations: Location[] = [
     name: "Rhino Coffee",
     description: "Rhino — «классная кофейня, есть что съесть, есть место посидеть»: спешелти-кофе с 2019 года, выпечка и завтраки. Уютный зал + небольшая терраса. С ребёнком удобно на улице, внутри есть высокий подоконник-бар для коротких пауз; из «детского» — какао, круассаны, сырники.",
     category: "CAFE",
-    latitude: 41.6489,
-    longitude: 41.6417,
+    latitude: 41.6471593,
+    longitude: 41.6330187,
     photos: [
       "https://madloba.info/media/images/rhino-coffee-03.max-1920x1080.format-webp.mwtmk.webp"
     ],
@@ -226,8 +226,8 @@ export const locations: Location[] = [
     name: "Шлю привет из Батума",
     description: "«Шлю привет из Батума» — много блюд и есть где посидеть, кухня средняя. Историческое кафе 2003 года в центре, большой зал + витрина десертов. Для ребёнка — безопасно и просторно; берите мороженое/пирожные, есть детские варианты напитков.",
     category: "CAFE",
-    latitude: 41.6499,
-    longitude: 41.6413,
+    latitude: 41.6499538,
+    longitude: 41.6322888,
     photos: [
       "https://www.infobatumi.ge/wp-content/uploads/2024/11/Privet-Iz-Batuma-2024-8192.jpg"
     ],
@@ -285,8 +285,8 @@ export const locations: Location[] = [
     name: "Статуи Али и Нино",
     description: "Символическая скульптура двух движущихся фигур, представляющих трагическую любовь мусульманина Али и христианки Нино. Фигуры движутся навстречу друг другу и расходятся, символизируя вечную любовь.",
     category: "ATTRACTION",
-    latitude: 41.6556,
-    longitude: 41.6367,
+    latitude: 41.6555103,
+    longitude: 41.6415297,
     photos: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Batumi_Dec_2019_08_34_16_699000.jpeg/2560px-Batumi_Dec_2019_08_34_16_699000.jpeg"
     ],
@@ -313,8 +313,8 @@ export const locations: Location[] = [
     name: "Музей искусств Аджарии",
     description: "Региональный музей с коллекцией грузинского и европейского искусства. Постоянные и временные выставки, образовательные программы.",
     category: "MUSEUM",
-    latitude: 41.6431,
-    longitude: 41.6394,
+    latitude: 41.6485426,
+    longitude: 41.6337789,
     photos: [
       "https://upload.wikimedia.org/wikipedia/commons/c/c4/State_Art_Museum_of_Adjara.jpg"
     ],
@@ -323,5 +323,20 @@ export const locations: Location[] = [
     coolnessRating: "JUST_OK",
     visited: false
   },
+  {
+    name: "Парк 6 мая",
+    description: "Центральный парк Батуми, расположенный в самом сердце города. Красивый зелёный оазис с аллеями, фонтанами и скульптурами. Идеальное место для прогулок, отдыха и фотосессий. В парке есть детские площадки, скамейки для отдыха и множество деревьев, создающих тень в жаркие дни. Особенно красив вечером, когда включается подсветка фонтанов.",
+    category: "PARK",
+    latitude: 41.6479402,
+    longitude: 41.624972,
+    photos: [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Batumi_6_May_Park.jpg/800px-Batumi_6_May_Park.jpg",
+      "https://api.visitbatumi.com/media/images/600x600/6-may-park-batumi.webp"
+    ],
+    address: "Парк 6 мая, Батуми, Грузия",
+    openingHours: "Круглосуточно",
+    coolnessRating: "COOL",
+    visited: false
+  }
 
 ];
