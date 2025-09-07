@@ -86,7 +86,7 @@ const getCategoryColor = (category: string): string => {
   return colors[category] || '#6c757d';
 };
 
-// Category icons for popup
+// Category icons for markers
 const getCategoryIcon = (category: string): string => {
   const icons: Record<string, string> = {
     PARK: '🌳',
@@ -105,34 +105,85 @@ const getCategoryIcon = (category: string): string => {
   return icons[category] || '📍';
 };
 
-// Create custom marker icon
+// Create custom marker icon with category-specific styling
 const createCustomIcon = (category: string, isVisited: boolean) => {
   const color = getCategoryColor(category);
+  const icon = getCategoryIcon(category);
   const opacity = isVisited ? 0.7 : 1;
+  
+  // Different marker shapes for different categories
+  let markerShape = 'circle';
+  let markerSize = 24;
+  
+  switch (category) {
+    case 'RESTAURANT':
+    case 'CAFE':
+    case 'DESSERT':
+      markerShape = 'square';
+      markerSize = 26;
+      break;
+    case 'PARK':
+    case 'BEACH':
+      markerShape = 'circle';
+      markerSize = 28;
+      break;
+    case 'ATTRACTION':
+    case 'MUSEUM':
+      markerShape = 'diamond';
+      markerSize = 26;
+      break;
+    case 'SHOPPING':
+      markerShape = 'square';
+      markerSize = 24;
+      break;
+    case 'NIGHTLIFE':
+    case 'ENTERTAINMENT':
+      markerShape = 'star';
+      markerSize = 26;
+      break;
+    case 'HOTEL':
+      markerShape = 'rectangle';
+      markerSize = 24;
+      break;
+    default:
+      markerShape = 'circle';
+      markerSize = 24;
+  }
+  
+  let borderRadius = '50%';
+  if (markerShape === 'square') borderRadius = '4px';
+  if (markerShape === 'diamond') borderRadius = '4px';
+  if (markerShape === 'rectangle') borderRadius = '8px';
+  if (markerShape === 'star') borderRadius = '50%';
   
   return L.divIcon({
     className: 'custom-marker',
     html: `
       <div style="
-        background-color: ${color};
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 2px solid white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        background-color: white;
+        width: ${markerSize}px;
+        height: ${markerSize}px;
+        border-radius: ${borderRadius};
+        border: 2px solid ${color};
+        box-shadow: 0 3px 6px rgba(0,0,0,0.4);
         opacity: ${opacity};
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 10px;
-        color: white;
+        font-size: 24px;
+        color: ${color};
         font-weight: bold;
+        transform: ${markerShape === 'diamond' ? 'rotate(45deg)' : markerShape === 'star' ? 'rotate(20deg)' : 'rotate(0deg)'};
+        position: relative;
       ">
-        ${isVisited ? '✓' : '📍'}
+        <span style="transform: ${markerShape === 'diamond' ? 'rotate(-45deg)' : 'rotate(0deg)'};">
+          ${icon}
+        </span>
+        ${isVisited ? '<div style="position: absolute; top: -2px; right: -2px; background: white; border-radius: 50%; width: 8px; height: 8px; display: flex; align-items: center; justify-content: center; font-size: 6px;">✓</div>' : ''}
       </div>
     `,
-    iconSize: [20, 20],
-    iconAnchor: [10, 10]
+    iconSize: [markerSize, markerSize],
+    iconAnchor: [markerSize / 2, markerSize / 2]
   });
 };
 
@@ -331,13 +382,44 @@ onUnmounted(() => {
     <div class="map-legend">
       <h4>Легенда:</h4>
       <div class="legend-items">
-        <div class="legend-item">
-          <div class="legend-marker visited">✓</div>
-          <span>Посещено</span>
+        <div class="legend-category">
+          <h5>Формы маркеров:</h5>
+          <div class="legend-shapes">
+            <div class="legend-item">
+              <div class="legend-marker circle">🌳</div>
+              <span>Парки, Пляжи</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-marker square">🍽️</div>
+              <span>Рестораны, Кафе</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-marker diamond">🏛️</div>
+              <span>Достопримечательности</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-marker star">🌃</div>
+              <span>Развлечения</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-marker rectangle">🏨</div>
+              <span>Отели</span>
+            </div>
+          </div>
         </div>
-        <div class="legend-item">
-          <div class="legend-marker not-visited">📍</div>
-          <span>Не посещено</span>
+        
+        <div class="legend-status">
+          <h5>Статус посещения:</h5>
+          <div class="legend-items">
+            <div class="legend-item">
+              <div class="legend-marker visited">✓</div>
+              <span>Посещено</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-marker not-visited">📍</div>
+              <span>Не посещено</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -404,45 +486,93 @@ onUnmounted(() => {
 }
 
 .map-legend h4 {
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 1rem 0;
   font-size: 1rem;
   color: #333;
 }
 
+.map-legend h5 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 600;
+}
+
 .legend-items {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap;
+}
+
+.legend-category,
+.legend-status {
+  flex: 1;
+  min-width: 200px;
+}
+
+.legend-shapes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #666;
 }
 
 .legend-marker {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  border: 4px solid #007bff;
+  background-color: transparent;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  color: white;
+  font-size: 16px;
+  color: #007bff;
   font-weight: bold;
+  flex-shrink: 0;
+}
+
+.legend-marker.circle {
+  border-radius: 50%;
+}
+
+.legend-marker.square {
+  border-radius: 4px;
+}
+
+.legend-marker.diamond {
+  border-radius: 4px;
+  transform: rotate(45deg);
+}
+
+.legend-marker.diamond span {
+  transform: rotate(-45deg);
+}
+
+.legend-marker.star {
+  border-radius: 50%;
+}
+
+.legend-marker.rectangle {
+  border-radius: 8px;
 }
 
 .legend-marker.visited {
-  background-color: #28a745;
+  border-color: #28a745;
+  color: #28a745;
 }
 
 .legend-marker.not-visited {
-  background-color: #007bff;
+  border-color: #007bff;
+  color: #007bff;
 }
 
 /* Ensure map tiles render properly */
